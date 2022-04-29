@@ -1,7 +1,7 @@
 
 
 # DEGRE function
-DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix, num_cores=2){
+DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
   time_start <- Sys.time()
   
   ### Checking steps in the matrices
@@ -185,12 +185,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   names <- as.data.frame(colnames(count_matrix_bip_overdisp))
   colnames(names) <- c("X1")
-  
-  cores <- detectCores()
-  no_cores <- num_cores
-  cl <- makeCluster(no_cores)
-  registerDoParallel(cl)
-  
+
   calcglmm <- function(i, count_matrix_bip_overdisp) {	
     tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)), 
                                          data = count_matrix_bip_overdisp, family=nbinom2, 
@@ -247,8 +242,6 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   b = Sys.time()
   print(b-time_start)
-  
-  stopCluster(cl)
   
   return(results)
 }

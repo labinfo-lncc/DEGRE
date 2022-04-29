@@ -8,7 +8,4 @@ import(gridExtra)
 import(dplyr)
 import(ggplot2)
 import(ggpubr)
-importFrom(doParallel,detectCores)
-importFrom(doParallel,makeCluster)
-importFrom(doParallel,registerDoParallel)
-
+import(doParallel)

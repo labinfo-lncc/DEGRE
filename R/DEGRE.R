@@ -9,6 +9,8 @@ library('car')
 library('tibble')
 library('gridExtra')
 library('dplyr')
+library(ggplot2)
+library(ggpubr)
 
 # DEGRE function
 DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
@@ -263,11 +265,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   return(results)
 }
 
-## Cutoff of the significance level
-results_significance <- results[results$`Q-value` < 0.05,]
 
-library(ggplot2)
-library(ggpubr)
 ## To run the graph below, you must have filtered with the cutoff of the significance level.
 BarGraphDEGRE <- function(results, 
                           log2FC_cutoff = 1, 
@@ -342,3 +340,5 @@ BarGraphDEGRE <- function(results,
 #teste_design_matrix <- read.table("Área de Trabalho/design_matrix_for_example.csv",  header = TRUE, sep = ",")
 #results <- DEGRE(GSE = teste_count_matrix, num_reps = 2, p_value_adjustment = "BH", design_matrix = teste_design_matrix, formula = "condition + (1|sex)")
 #BarGraphDEGRE(results = results_significance)
+## Cutoff of the significance level
+#results_significance <- results[results$`Q-value` < 0.05,]

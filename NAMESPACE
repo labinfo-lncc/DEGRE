@@ -1,2 +1,11 @@
 export("DEGRE")
-   
+import(parglm)
+import(glmmTMB)
+import(doParallel)
+import(foreach)
+import(car)
+import(tibble)
+import(gridExtra)
+import(dplyr)
+import(ggplot2)
+import(ggpubr)

@@ -1,16 +1,4 @@
-##### DEGRE
 
-# Libraries
-library('parglm')
-library('glmmTMB')
-library('doParallel')
-library('foreach')
-library('car')
-library('tibble')
-library('gridExtra')
-library('dplyr')
-library(ggplot2)
-library(ggpubr)
 
 # DEGRE function
 DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){

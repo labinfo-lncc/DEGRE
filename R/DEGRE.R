@@ -234,7 +234,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   log2fc <- as.data.frame(log2(one_fac_to_sum$sum/two_fac_to_sum$sum))
   colnames(log2fc) <- "log2FC"
-  log2fc$ID <- row.names(count_matrix)resyk
+  log2fc$ID <- row.names(count_matrix)
   
   results_teste <- merge(log2fc, results, by = "ID")
   results <- results_teste

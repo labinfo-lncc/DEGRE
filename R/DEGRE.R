@@ -121,30 +121,21 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
       all(y == 0))),]
   
   ### Genes expressed in one condition and not in the other
-  with_zero_some_columns <-
-    count_matrix_Normalized[!(apply(count_matrix_Normalized, 1, function(y)
-      all(y == 0))),]
-  with_zero_some_columns <-
-    with_zero_some_columns[(apply(with_zero_some_columns, 1, function(y)
-      any(y == 0))),]
+  with_zero_some_columns <- count_matrix_Normalized[!(apply(count_matrix_Normalized, 1, function(y) all(y == 0))),]
+  with_zero_some_columns <- with_zero_some_columns[(apply(with_zero_some_columns, 1, function(y) any(y == 0))),]
   
   if (dim(with_zero_some_columns)[1] != 0) {
     # Expressed a replicate and not in the other
-    with_zero_some_columns <-
-      as.data.frame(with_zero_some_columns)
+    with_zero_some_columns <- as.data.frame(with_zero_some_columns)
     
     for (i in 1:dim(with_zero_some_columns)[1]) {
-      with_zero_some_columns$p_value_005[i] <-
-        wilcox.test(as.numeric(with_zero_some_columns[i,]), conf.level = 5)$p.value
+      with_zero_some_columns$p_value_005[i] <- wilcox.test(as.numeric(with_zero_some_columns[i,]), conf.level = 0.95)$p.value
     }
     
     with_zero_wilcoxon_some_columns <- data.frame() # Equal to zero
-    with_zero_some_columns_updated <-
-      data.frame() # Differ from zero
-    with_zero_wilcoxon_some_columns <-
-      with_zero_some_columns[with_zero_some_columns$p_value_005 > 0.05,]
-    with_zero_some_columns_updated <-
-      with_zero_some_columns[with_zero_some_columns$p_value_005 < 0.05,]
+    with_zero_some_columns_updated <- data.frame() # Differ from zero
+    with_zero_wilcoxon_some_columns <- with_zero_some_columns[with_zero_some_columns$p_value_005 > 0.05,]
+    with_zero_some_columns_updated <- with_zero_some_columns[with_zero_some_columns$p_value_005 < 0.05,]
     
     with_zero_some_columns_updated$p_value_005 <- NULL
     
@@ -168,18 +159,14 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   # CPM filtering of low counts
   without_zero_CPM <- without_zero
   
-  sums_by_col_by_milion <-
-    apply(without_zero_CPM, 2, sum) / 1000000
-  without_zero_CPM <-
-    sweep(without_zero_CPM, 2, sums_by_col_by_milion, `/`)
+  sums_by_col_by_milion <- apply(without_zero_CPM, 2, sum) / 1000000
+  without_zero_CPM <- sweep(without_zero_CPM, 2, sums_by_col_by_milion, `/`)
   
   without_zero_CPM$average_CPM <- apply(without_zero_CPM, 1, mean)
-  without_zero_CPM <-
-    without_zero_CPM[without_zero_CPM$average_CPM > 1,]
+  without_zero_CPM <- without_zero_CPM[without_zero_CPM$average_CPM > 1,]
   
   rownames <- row.names(without_zero_CPM)
-  without_zero_without_low_count <-
-    subset(without_zero, rownames(without_zero) %in% rownames)
+  without_zero_without_low_count <- subset(without_zero, rownames(without_zero) %in% rownames)
   
   # GLMM
   count_matrix_bip_overdisp <- as.data.frame(t(without_zero_without_low_count))
@@ -188,10 +175,9 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   count_matrix_bip_overdisp$sample <- rownames(count_matrix_bip_overdisp)
   count_matrix_bip_overdisp <- merge(count_matrix_bip_overdisp, design_matrix, by = "sample")
   rownames(count_matrix_bip_overdisp) <- count_matrix_bip_overdisp$sample
-  count_matrix_bip_overdisp <- select(count_matrix_bip_overdisp, -c(sample))
+  count_matrix_bip_overdisp <- subset(count_matrix_bip_overdisp, select=-c(sample))
   extra_cols <- dim(count_matrix_bip_overdisp)[2] - dim(as.data.frame(t(without_zero_without_low_count)))[2]
-  count_matrix_bip_overdisp <- count_matrix_bip_overdisp[,c(((dim(count_matrix_bip_overdisp)[2]+1)-extra_cols):dim(count_matrix_bip_overdisp)[2],
-                                          extra_cols+1:dim(count_matrix_bip_overdisp)[2]-extra_cols)]
+  count_matrix_bip_overdisp <- count_matrix_bip_overdisp[,c(((dim(count_matrix_bip_overdisp)[2]+1)-extra_cols):dim(count_matrix_bip_overdisp)[2], extra_cols+1:dim(count_matrix_bip_overdisp)[2]-extra_cols)]
   count_matrix_bip_overdisp <- count_matrix_bip_overdisp[,-c((dim(count_matrix_bip_overdisp)[2]-extra_cols+1):dim(count_matrix_bip_overdisp)[2])]
   
   names <- as.data.frame(colnames(count_matrix_bip_overdisp))
@@ -205,7 +191,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   results <-  data.frame(1,1)
   for(i in 1:length(models)){
-    tryCatch( if(!is.null(models[[i]]) & !is.na(models[[i]])){
+    tryCatch( if(!is.null(models[[i]]) & !is.na(models[[i]][2])){
       results[i,1] <- models[[i]][1]
       results[i,2] <- models[[i]][2]
     }, error=function(err) {
@@ -216,8 +202,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   results <- results[complete.cases(results$`P-value`),]
   
   # P-values adjusted:
-  results$`Q-value` <- p.adjust(results$`P-value`, method = paste0(p_value_adjustment), 
-                                n = length(results$`P-value`))
+  results$`Q-value` <- p.adjust(results$`P-value`, method = paste0(p_value_adjustment), n = length(results$`P-value`))
 
   # log2FC
   # The user inputs the design and the count matrix

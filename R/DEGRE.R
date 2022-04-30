@@ -217,7 +217,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   # P-values adjusted:
   results$`Q-value` <- p.adjust(results$`P-value`, method = paste0(p_value_adjustment), 
-                                n = length(results$`P-value`))\
+                                n = length(results$`P-value`))
 
   # log2FC
   # The user inputs the design and the count matrix

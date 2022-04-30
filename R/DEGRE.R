@@ -1,4 +1,54 @@
+### Pre-processing steps
+  # Scale correction
+scale_correction <- function(count_matrix) {
+    sums <- apply(count_matrix, 2, sum)
+    df_rnaseq <- sums / min(sums)
+    count_matrix <- t((t(count_matrix) / df_rnaseq))
+    return(count_matrix)
+}
 
+# RLE normalization
+size_factors <- function(count_matrix) {
+    count_matrix_log2 <- log2(count_matrix)
+    count_matrix_log2 <- as.data.frame(count_matrix_log2)
+    
+    # Geometric mean by rows
+    count_matrix_log2$geom_mean <-
+      apply(count_matrix_log2, 1, prod) ^ (1 / ncol(count_matrix_log2))
+    count_matrix_log2 <-
+      count_matrix_log2[count_matrix_log2$geom_mean != 0,] # Not genes with geom. mean equal to zero
+    
+    count_matrix_log2_ratios <- count_matrix_log2[, 1:ncol(count_matrix_log2) - 1]
+    count_matrix_log2_ratios <- count_matrix_log2_ratios / count_matrix_log2$geom_mean
+    
+    medianWithoutNA <- function(x) {
+      median(x[which(!is.na(x))])
+    }
+    Sj_median <-
+      apply(count_matrix_log2_ratios, 2, medianWithoutNA) # Median without NAs
+    
+    Sj_median_log <- log2(Sj_median)
+    Sj_median_log_sum <- sum(Sj_median_log)
+    Sj_median_log_sum_exp <-
+      exp((Sj_median_log_sum) * (1 / length(Sj_median_log)))
+    Sj_median_log_sum_exp_final <-
+      Sj_median / Sj_median_log_sum_exp
+    
+    return(Sj_median_log_sum_exp_final)
+}
+
+#calculates GLMM
+calcglmm <- function(i, count_matrix_bip_overdisp) {	
+    tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)), 
+                                         data = count_matrix_bip_overdisp, family=nbinom2, 
+                                         REML = TRUE,
+                                         control=glmmTMBControl( optimizer=optim, 
+                                                                 optArgs=list(method="BFGS"))), 
+                                 type=c("II", "III", 2, 3))[3][[1]]
+    
+    return(c(names$X1[i], tmp)) 
+}
+  
 
 # DEGRE function
 DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
@@ -53,47 +103,9 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
     stop("You only have one level in the design matrix.")
   if(dim(as.data.frame(table(design_matrix[2])))[2] > 2)
     stop("You have more than two levels in the design matrix.")
-  
-  ### Pre-processing steps
-  # Scale correction
-  scale_correction <- function(count_matrix) {
-    sums <- apply(count_matrix, 2, sum)
-    df_rnaseq <- sums / min(sums)
-    count_matrix <- t((t(count_matrix) / df_rnaseq))
-    return(count_matrix)
-  }
+
   count_matrix <- scale_correction(count_matrix)
-  
-  # RLE normalization
-  size_factors <- function(count_matrix) {
-    count_matrix_log2 <- log2(count_matrix)
-    count_matrix_log2 <- as.data.frame(count_matrix_log2)
-    
-    # Geometric mean by rows
-    count_matrix_log2$geom_mean <-
-      apply(count_matrix_log2, 1, prod) ^ (1 / ncol(count_matrix_log2))
-    count_matrix_log2 <-
-      count_matrix_log2[count_matrix_log2$geom_mean != 0,] # Not genes with geom. mean equal to zero
-    
-    count_matrix_log2_ratios <- count_matrix_log2[, 1:ncol(count_matrix_log2) - 1]
-    count_matrix_log2_ratios <- count_matrix_log2_ratios / count_matrix_log2$geom_mean
-    
-    medianWithoutNA <- function(x) {
-      median(x[which(!is.na(x))])
-    }
-    Sj_median <-
-      apply(count_matrix_log2_ratios, 2, medianWithoutNA) # Median without NAs
-    
-    Sj_median_log <- log2(Sj_median)
-    Sj_median_log_sum <- sum(Sj_median_log)
-    Sj_median_log_sum_exp <-
-      exp((Sj_median_log_sum) * (1 / length(Sj_median_log)))
-    Sj_median_log_sum_exp_final <-
-      Sj_median / Sj_median_log_sum_exp
-    
-    return(Sj_median_log_sum_exp_final)
-  }
-  
+
   Sj <- size_factors(count_matrix = count_matrix)
   count_matrix_Normalized <- as.data.frame(t(t(count_matrix) / Sj))
   
@@ -144,7 +156,6 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
     without_zero <- round(without_zero)
   }
   
-  
   # Same counts in all replicates
   ## Remove same values in all replicates
   uniques <- apply(without_zero, 1, unique)
@@ -186,17 +197,6 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   names <- as.data.frame(colnames(count_matrix_bip_overdisp))
   colnames(names) <- c("X1")
 
-  calcglmm <- function(i, count_matrix_bip_overdisp) {	
-    tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)), 
-                                         data = count_matrix_bip_overdisp, family=nbinom2, 
-                                         REML = TRUE,
-                                         control=glmmTMBControl( optimizer=optim, 
-                                                                 optArgs=list(method="BFGS"))), 
-                                 type=c("II", "III", 2, 3))[3][[1]]
-    
-    return(c(names$X1[i], tmp)) 
-  }
-  
   models <-c()
   li <- (extra_cols+1):dim(count_matrix_bip_overdisp)[2]
   models <- foreach(i=li, .packages=c("glmmTMB"), .errorhandling = 'pass') %dopar% {
@@ -215,11 +215,10 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   colnames(results) <- c("ID","P-value")
   results <- results[complete.cases(results$`P-value`),]
   
-  
   # P-values adjusted:
   results$`Q-value` <- p.adjust(results$`P-value`, method = paste0(p_value_adjustment), 
-                                n = length(results$`P-value`))
-  
+                                n = length(results$`P-value`))\
+
   # log2FC
   # The user inputs the design and the count matrix
   variables <- as.data.frame(table(design_matrix[,2]))[,1]
@@ -235,7 +234,7 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   log2fc <- as.data.frame(log2(one_fac_to_sum$sum/two_fac_to_sum$sum))
   colnames(log2fc) <- "log2FC"
-  log2fc$ID <- row.names(count_matrix)
+  log2fc$ID <- row.names(count_matrix)resyk
   
   results_teste <- merge(log2fc, results, by = "ID")
   results <- results_teste

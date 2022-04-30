@@ -1,4 +1,9 @@
-### Pre-processing steps
+# DEGRE function
+DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
+  time_start <- Sys.time()
+
+
+  ### Pre-processing steps
   # Scale correction
 scale_correction <- function(count_matrix) {
     sums <- apply(count_matrix, 2, sum)
@@ -48,12 +53,9 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
     
     return(c(names$X1[i], tmp)) 
 }
-  
 
-# DEGRE function
-DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
-  time_start <- Sys.time()
-  
+
+
   ### Checking steps in the matrices
   # Check if the user has the count and the design matrices
   if (missing(count_matrix))
@@ -111,14 +113,10 @@ DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, de
   
   # Separate zeros and non-zeros in all columns
   ## Expressed in all samples
-  without_zero <-
-    count_matrix_Normalized[!(apply(count_matrix_Normalized, 1, function(y)
-      any(y == 0))),]
+  without_zero <- count_matrix_Normalized[!(apply(count_matrix_Normalized, 1, function(y) any(y == 0))),]
   
   ## Never expressed.
-  with_zero_all_columns <-
-    count_matrix_Normalized[(apply(count_matrix_Normalized, 1, function(y)
-      all(y == 0))),]
+  with_zero_all_columns <- count_matrix_Normalized[(apply(count_matrix_Normalized, 1, function(y) all(y == 0))),]
   
   ### Genes expressed in one condition and not in the other
   with_zero_some_columns <- count_matrix_Normalized[!(apply(count_matrix_Normalized, 1, function(y) all(y == 0))),]

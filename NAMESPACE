@@ -1,4 +1,5 @@
 export("DEGRE")
+export("BarGraphDEGRE")
 import(parglm)
 import(glmmTMB)
 import(foreach)

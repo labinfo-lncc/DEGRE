@@ -1,6 +1,6 @@
 export("DEGRE")
 export("BarGraphDEGRE")
-export("VolcanoDEGREE")
+export("VolcanoDEGRE")
 export("BarGraphDEGRE")
 import(parglm)
 import(glmmTMB)

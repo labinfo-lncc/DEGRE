@@ -294,7 +294,7 @@ BarGraphDEGRE <- function(results,
 }
 
 #Volcano plot
-VolcanoDEGREE <- function (results,
+VolcanoDEGRE <- function (results,
                            log2FC_cutoff = 1,
                            padj = 0.05,
                            delabel = "",
@@ -313,7 +313,7 @@ VolcanoDEGREE <- function (results,
   results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
   results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
                            
-  ggp <- ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
+  ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
         geom_point() + 
         theme_minimal() +
         geom_text_repel() +

@@ -295,33 +295,31 @@ BarGraphDEGRE <- function(results,
 
 #Volcano plot
 VolcanoDEGREE <- function (results,
-                           log2FC_cutoff = 1, 
+                           log2FC_cutoff = 1,
+                           padj = 0.05,
+                           delabel = "",
                            downregulated_color = "coral2",
                            upregulated_color = "cornflowerblue",
                            xlab = "log2Foldchange",
                            ylab = "-log10(pvalue)",
-                           font.x = 10,
-                           font.y = 10,
-                           font.tickslab = 10,
                            legend_position = "right",
                            legend.title = "Regulation")
 {
-  if(missing(results) | is.data.frame(results))
+
+  if(missing(results))
     stop("You need to enter with the output of the DEGRE function.")
-  
-  log2FC_cutoff <- as.numeric(log2FC_cutoff)
-  font.x <- as.numeric(font.x)
-  font.y <- as.numeric(font.y)
-  font.tickslab <- as.numeric(font.tickslab)
+
+  results$diffexpressed <- "NO"
+  results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
+  results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
                            
-  ggplot(data=results, aes(x=log2FoldChange, y=-log10(pvalue), col=diffexpressed, label=delabel)) +
+  ggp <- ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
         geom_point() + 
         theme_minimal() +
         geom_text_repel() +
         scale_color_manual(values=c("blue", "black", "red")) +
-        geom_vline(xintercept=c(-0.6, 0.6), col="red") +
-        geom_hline(yintercept=-log10(0.05), col="red")
-
+        geom_vline(xintercept=c(-log2FC_cutoff, log2FC_cutoff), col="red") +
+        geom_hline(yintercept=-log10(padj), col="red")
 
 }
 

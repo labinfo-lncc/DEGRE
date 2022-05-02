@@ -1,10 +1,8 @@
 # Inferring Differential Expression Genes with Random Effects using the DEGRE R package
 
-[TOC]
-
 ## Scope
 
-![](/home/douglast/Área de Trabalho/DEGRE logo2.png)
+![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/DEGRE%20logo2.png?raw=true)
 
 The DEGRE is an R package to identify Differential Expression Genes (DEGs) among two groups considering the insertion of the random effects in the experimental design matrix. These effects are identified previously in the experimental design matrix. The package has the implementation of pre-processing steps to clean the count matrix of the gene reads, and it uses the Generalized Linear Mixed Model (GLMM) with the negative binomial distribution to infer the DEGs.
 

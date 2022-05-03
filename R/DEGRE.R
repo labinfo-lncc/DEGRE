@@ -228,7 +228,6 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   return(results)
 }
 
-
 ## To run the graph below, you must have filtered with the cutoff of the significance level.
 BarGraphDEGRE <- function(results, 
                           log2FC_cutoff = 1, 
@@ -294,6 +293,35 @@ BarGraphDEGRE <- function(results,
         legend.title = legend.title)
 }
 
+#Volcano plot
+VolcanoDEGRE <- function (results,
+                           log2FC_cutoff = 1,
+                           padj = 0.05,
+                           delabel = "",
+                           downregulated_color = "coral2",
+                           upregulated_color = "cornflowerblue",
+                           xlab = "log2Foldchange",
+                           ylab = "-log10(pvalue)",
+                           legend_position = "right",
+                           legend.title = "Regulation")
+{
+
+  if(missing(results))
+    stop("You need to enter with the output of the DEGRE function.")
+
+  results$diffexpressed <- "NO"
+  results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
+  results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
+                           
+  ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
+        geom_point() + 
+        theme_minimal() +
+        geom_text_repel() +
+        scale_color_manual(values=c("blue", "black", "red")) +
+        geom_vline(xintercept=c(-log2FC_cutoff, log2FC_cutoff), col="red") +
+        geom_hline(yintercept=-log10(padj), col="red")
+
+}
 
 
 

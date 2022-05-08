@@ -295,34 +295,44 @@ BarGraphDEGRE <- function(results,
 
 #Volcano plot
 VolcanoDEGRE <- function (results,
-                           log2FC_cutoff = 1,
-                           padj = 0.05,
-                           delabel = "",
-                           downregulated_color = "coral2",
-                           upregulated_color = "cornflowerblue",
-                           xlab = "log2Foldchange",
-                           ylab = "-log10(pvalue)",
-                           legend_position = "right",
-                           legend.title = "Regulation")
+                          log2FC_cutoff = 1,
+                          padj = 0.05,
+                          delabel = "",
+                          font.x = 10,
+                          font.y = 10,
+                          font.tickslab = 10,
+                          downregulated_color = "coral2",
+                          upregulated_color = "cornflowerblue",
+                          xlab = "log2Foldchange",
+                          ylab = "-log10(P-value)",
+                          legend_position = "right",
+                          legend.title = "Regulation")
 {
-
+  
   if(missing(results))
     stop("You need to enter with the output of the DEGRE function.")
-
+  
   results$diffexpressed <- "NO"
   results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
   results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
-                           
-  ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
-        geom_point() + 
-        theme_minimal() +
-        geom_text_repel() +
-        scale_color_manual(values=c("blue", "black", "red")) +
-        geom_vline(xintercept=c(-log2FC_cutoff, log2FC_cutoff), col="red") +
-        geom_hline(yintercept=-log10(padj), col="red")
-
+  
+  graph <- ggplot(data=results, aes(x=log2FC, y=-log10(`Q-value`), col=diffexpressed, label=delabel)) +
+    geom_point() + 
+    theme_minimal() +
+    geom_text_repel() +
+    scale_color_manual(values=c(paste0(downregulated_color), "grey", paste0(upregulated_color))) +
+    geom_vline(xintercept=c(-log2FC_cutoff, log2FC_cutoff), col="red") +
+    geom_hline(yintercept=-log10(padj), col="red")
+  
+  ggpar(graph,
+        font.x = c(paste(font.x),"black"), 
+        font.y = c(paste(font.y),"black"),
+        font.tickslab = c(paste(font.tickslab),"black"),
+        ylab=ylab,
+        xlab=xlab,
+        legend = legend_position,
+        legend.title = legend.title)
 }
-
 
 
 

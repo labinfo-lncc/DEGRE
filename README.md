@@ -288,7 +288,7 @@ VolcanoDEGRE(results = results,
 
 At the `results` argument, you have to specify the data frame you want to plot. The following result is shown below.
 
-![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/Volcano_DEGRE_example.png?raw=true =250x250)
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Volcano_DEGRE_example.png" width="500">
 
 We recommend you to save it using the png function with the following parameters:
 
@@ -359,7 +359,7 @@ BarGraphDEGRE(results = results,
 
 At the `results` argument, you have to specify the data frame you want to plot. The following result is shown below.
 
-![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/BarPlot_DEGRE_example.png?raw=true =250x250)
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/BarPlot_DEGRE_example.png" width="500">
 
 We recommend you to save it using the png function with the following parameters:
 

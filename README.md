@@ -75,7 +75,7 @@ Attention: if you are having troubles with the glmmTMB package, you can try to r
 
 ## Quick start
 
-The DEGs are inferred according to its read counts among the replicates between two groups and the quantitative differences of the read counts are inferred to contribute in its differential expression.
+The DEGs are inferred according to its read counts among the replicates between two groups and the quantitative differences of the read counts are inferred to contribute in differential expression.
 
 To use this package you must have a count matrix that contains the read counts for each gene in each of the sample replicates and also a design matrix that contains sample informations. In the count matrix, the genes are represented by the rows and the replicates are represented by the columns. In the design matrix, the columns represent the relevant information of the samples. 
 

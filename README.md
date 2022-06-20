@@ -129,6 +129,19 @@ As you can see, the DEGRE function has important parameter in which are describe
 - `p_value_adjustment` - All the *P*-values computed must be corrected and the DEGRE package offers two possibilities for this *P*-value correction: "BH" (Benjamini-Hochberg) correction, in which it is the default for the package, and "BON" (Bonferroni) correction.
 
 
+## What are the fixed and random effects?
+The fixed effects can be understood as variables in which are easier to control in the experimental design. Let's suppose we are doing an RNA-Seq experiment to identify differentially expressed genes in whole blood between a group of people that receives a specific treatment compared to a group of people that receive only water instead of the medicine. The illustration of this comparison can be seen below:
+
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol.png" width="500">
+
+Notice that we know that all people in the group A received the treatment while all people of the group B received only water, this kind of comparison in which we can control the effect between both groups comprehends the fixed effects.
+
+Now suppose that in the both groups we have some heterogeneity related to the biological sex, in which there are men and women in different proportions in the both groups. The illustration of this can be seen below:
+
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="500">
+
+This kind of effect in which we did not control is related to the random effect. Other example of random effects that can be harder to control may involve the different concentration of biochemical molecules inside of the both groups and the concentration of these molecules involved in the gene expression.
+
 
 ## Some applications you can do!
 

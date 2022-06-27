@@ -333,13 +333,3 @@ VolcanoDEGRE <- function (results,
         legend = legend_position,
         legend.title = legend.title)
 }
-
-
-
-## Rodar a função 'DEGRE()' antes das etapas abaixo.
-#teste_count_matrix <- read.table("Área de Trabalho/count_matrix_for_example.csv", header = TRUE, sep = ",")
-#teste_design_matrix <- read.table("Área de Trabalho/design_matrix_for_example.csv",  header = TRUE, sep = ",")
-#results <- DEGRE(GSE = teste_count_matrix, num_reps = 2, p_value_adjustment = "BH", design_matrix = teste_design_matrix, formula = "condition + (1|sex)")
-#BarGraphDEGRE(results = results_significance)
-## Cutoff of the significance level
-#results_significance <- results[results$`Q-value` < 0.05,]

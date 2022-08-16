@@ -1,19 +1,18 @@
 # DEGRE function
-DEGRE <- function(count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix){
+DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matrix){
   time_start <- Sys.time()
-
-
+  
   ### Pre-processing steps
   # Scale correction
-scale_correction <- function(count_matrix) {
+  scale_correction <- function(count_matrix) {
     sums <- apply(count_matrix, 2, sum)
     df_rnaseq <- sums / min(sums)
     count_matrix <- t((t(count_matrix) / df_rnaseq))
     return(count_matrix)
-}
-
-# RLE normalization
-size_factors <- function(count_matrix) {
+  }
+  
+  # RLE normalization
+  size_factors <- function(count_matrix) {
     count_matrix_log2 <- log2(count_matrix)
     count_matrix_log2 <- as.data.frame(count_matrix_log2)
     
@@ -40,10 +39,10 @@ size_factors <- function(count_matrix) {
       Sj_median / Sj_median_log_sum_exp
     
     return(Sj_median_log_sum_exp_final)
-}
-
-#calculates GLMM
-calcglmm <- function(i, count_matrix_bip_overdisp) {	
+  }
+  
+  #calculates GLMM
+  calcglmm <- function(i, count_matrix_bip_overdisp) {	
     tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)), 
                                          data = count_matrix_bip_overdisp, family=nbinom2, 
                                          REML = TRUE,
@@ -52,10 +51,10 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
                                  type=c("II", "III", 2, 3))[3][[1]]
     
     return(c(names$X1[i], tmp)) 
-}
-
-
-
+  }
+  
+  
+  
   ### Checking steps in the matrices
   # Check if the user has the count and the design matrices
   if (missing(count_matrix))
@@ -75,11 +74,9 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   if (nrow(design_matrix) == 0 && ncol(design_matrix) == 0)
     stop("Your design matrix has zero rows or zero columns.")
   
-  # Check if the user has the number of replicates and the formula
+  # Check if the user has the formula
   if (missing(formula))
     stop("You need to specify the formula.")
-  if (missing(num_reps))
-    stop("You need to specify the number of replicates.")
   
   # Check if the matrices are compatible in the name of the samples
   if(!is.na(setdiff(colnames(count_matrix), design_matrix[[1]])[1]))
@@ -95,19 +92,14 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   if(table(design_matrix[2])[1] == 1 || table(design_matrix[2])[2] == 1)
     stop("You must enter with at least two replicates for each experimental condition.")
   
-  # Check if the number of replicates that the user enter are equal to the number of replicates of the design matrix
-  if(table(design_matrix[2])[1] != num_reps || table(design_matrix[2])[2] != num_reps)
-    stop("The number of replicates you entered is different of the number of replicates
-         that your design matrix has.")
-  
   # Check if there is at least one level and max of two levels in the design matrix
   if(dim(as.data.frame(table(design_matrix[2])))[2] == 1)
     stop("You only have one level in the design matrix.")
   if(dim(as.data.frame(table(design_matrix[2])))[2] > 2)
     stop("You have more than two levels in the design matrix.")
-
+  
   count_matrix <- scale_correction(count_matrix)
-
+  
   Sj <- size_factors(count_matrix = count_matrix)
   count_matrix_Normalized <- as.data.frame(t(t(count_matrix) / Sj))
   
@@ -180,7 +172,7 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   
   names <- as.data.frame(colnames(count_matrix_bip_overdisp))
   colnames(names) <- c("X1")
-
+  
   models <-c()
   li <- (extra_cols+1):dim(count_matrix_bip_overdisp)[2]
   models <- foreach(i=li, .packages=c("glmmTMB"), .errorhandling = 'pass') %dopar% {
@@ -201,7 +193,7 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   
   # P-values adjusted:
   results$`Q-value` <- p.adjust(results$`P-value`, method = paste0(p_value_adjustment), n = length(results$`P-value`))
-
+  
   # log2FC
   # The user inputs the design and the count matrix
   variables <- as.data.frame(table(design_matrix[,2]))[,1]
@@ -219,13 +211,8 @@ calcglmm <- function(i, count_matrix_bip_overdisp) {
   colnames(log2fc) <- "log2FC"
   log2fc$ID <- row.names(count_matrix)
   
-  results_teste <- merge(log2fc, results, by = "ID")
-  results <- results_teste
-  
-  b = Sys.time()
-  print(b-time_start)
-  
-  return(results)
+  results_final <- merge(log2fc, results, by = "ID")
+  return(results_final)
 }
 
 ## To run the graph below, you must have filtered with the cutoff of the significance level.

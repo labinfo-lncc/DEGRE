@@ -47,8 +47,7 @@ To install the DEGRE package, you must run:
 ```R
 library(devtools)
 install_github("labinfo-lncc/DEGRE", 
-               ref="main", 
-               auth_token = "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")
+               ref="main")
 ```
 
 

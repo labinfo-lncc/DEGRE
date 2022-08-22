@@ -89,7 +89,6 @@ Then you can apply the DEGRE function:
 
 ```R
 results <- DEGRE(count_matrix = tab, 
-                 num_reps = 2, 
                  p_value_adjustment = "BH", 
                  design_matrix = des, 
                  formula = "condition + (1|sex)")
@@ -327,8 +326,6 @@ The explained parameters is described below:
 - `log2FC_cutoff` - it stores the cutoff of the log2FoldChange.
 
 - `padj` - it stores the cutoff of the *P*-adjusted value (*Q*-value).
-
-- `delabel` - It is a character argument that receives the xXXXXXXXXXXXXXXXXXXXXXXXXXX  ***REMOVER***?.  
 
 - `font.x` - the font size of the x axis.
 

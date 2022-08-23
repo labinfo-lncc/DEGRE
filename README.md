@@ -46,8 +46,8 @@ To install the DEGRE package, you must run:
 
 ```R
 library(devtools)
-install_github("labinfo-lncc/DEGRE", 
-               ref="main")
+install_github("labinfo-lncc/DEGRE",
+                ref="main", auth_token = "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")
 ```
 
 
@@ -87,10 +87,18 @@ library("DEGRE")
 Then you can apply the DEGRE function:
 
 ```R
-results <- DEGRE(count_matrix = tab, 
-                 p_value_adjustment = "BH", 
-                 design_matrix = des, 
+# Reading the count matrix and the design matrix for an example:
+dir <- system.file("data", package = "DEGRE")
+tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
+row.names(tab) <- tab[,1]; tab <- tab[,-1]
+des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
+
+# Running DEGRE function:
+results <- DEGRE(count_matrix = tab,
+                 p_value_adjustment = "BH",
+                 design_matrix = des,
                  formula = "condition + (1|sex)")
+
 ```
 
 

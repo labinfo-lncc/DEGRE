@@ -121,7 +121,6 @@ The DEGRE function has the following arguments:
 
 ```R
 results <- DEGRE(count_matrix, 
-                 num_reps,
                  design_matrix,
                  formula,
                  p_value_adjustment)
@@ -130,7 +129,6 @@ results <- DEGRE(count_matrix,
 As you can see, the DEGRE function has important parameter in which are described below:
 
 - `count_matrix` - a `data.frame` object. It receives the matrix with the reads for each gene as input. The rows are the gene IDs and the columns are the two groups with the identification of the replicates.
-- `num_reps` - it is the argument that stores the integer number of replicates for each group and it must be the same.
 - `design_matrix` - a `data.frame` object. It receives the experimental design matrix. The sample names must be identified in the first column. This matrix can also have more columns with informations for the fixed and the random effects for the samples.
 - `formula` - it receives the fixed and random effects as a quotation mark argument.
 - `p_value_adjustment` - All the *P*-values computed must be corrected and the DEGRE package offers two possibilities for this *P*-value correction: "BH" (Benjamini-Hochberg) correction, in which it is the default for the package, and "BON" (Bonferroni) correction.

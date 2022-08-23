@@ -111,6 +111,7 @@ The output of the DEGRE function (represented as `results` above) is a `data.fra
 - log2FC - the log2 fold-change.
 - *P*-value - the *P*-value computed for each gene in the Wald test (confirmar o nome certinho).
 - *Q*-value - the corrected *P*-values using BH or BON methods.
+- averagelogCPM - the log2CPM for each gene.
 
 
 

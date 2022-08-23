@@ -1,7 +1,5 @@
 # DEGRE function
 DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matrix){
-  time_start <- Sys.time()
-  
   ### Pre-processing steps
   # Scale correction
   scale_correction <- function(count_matrix) {
@@ -42,15 +40,15 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
   }
   
   #calculates GLMM
-  calcglmm <- function(i, count_matrix_bip_overdisp) {	
-    tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)), 
-                                         data = count_matrix_bip_overdisp, family=nbinom2, 
+  calcglmm <- function(i, count_matrix_bip_overdisp) {
+    tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)),
+                                         data = count_matrix_bip_overdisp, family=nbinom2,
                                          REML = TRUE,
-                                         control=glmmTMBControl( optimizer=optim, 
-                                                                 optArgs=list(method="BFGS"))), 
+                                         control=glmmTMBControl( optimizer=optim,
+                                                                 optArgs=list(method="BFGS"))),
                                  type=c("II", "III", 2, 3))[3][[1]]
     
-    return(c(names$X1[i], tmp)) 
+    return(c(names$X1[i], tmp))
   }
   
   
@@ -102,6 +100,15 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
   
   Sj <- size_factors(count_matrix = count_matrix)
   count_matrix_Normalized <- as.data.frame(t(t(count_matrix) / Sj))
+  
+  # Log2CPM
+  sums_by_col_by_milion_for_log2cpm <- apply(count_matrix_Normalized, 2, sum) / 1000000
+  temp <- sweep(count_matrix_Normalized, 2, sums_by_col_by_milion_for_log2cpm, `/`)
+  temp <- log(count_matrix_Normalized, base = 2)
+  temp2 <- as.data.frame(apply(temp, 1, mean))
+  temp2$genes <- row.names(temp2)
+  colnames(temp2) <- c("averagelogCPM","ID")
+  
   
   # Separate zeros and non-zeros in all columns
   ## Expressed in all samples
@@ -211,9 +218,12 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
   colnames(log2fc) <- "log2FC"
   log2fc$ID <- row.names(count_matrix)
   
-  results_final <- merge(log2fc, results, by = "ID")
-  return(results_final)
+  results_log2fc <- merge(log2fc, results, by = "ID")
+  results <- merge(results_log2fc, temp2, by.x = "ID")
+                                                          
+  return(results)
 }
+
 
 ## To run the graph below, you must have filtered with the cutoff of the significance level.
 BarGraphDEGRE <- function(results, 

@@ -105,10 +105,14 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
   sums_by_col_by_milion_for_log2cpm <- apply(count_matrix_Normalized, 2, sum) / 1000000
   temp <- sweep(count_matrix_Normalized, 2, sums_by_col_by_milion_for_log2cpm, `/`)
   temp <- log(count_matrix_Normalized, base = 2)
+  temp <- data.frame(lapply(temp, function(x) {
+    gsub(-Inf, 0, x)
+  }))
+  temp <- mutate_all(temp, function(x) as.numeric(as.character(x)))
+  row.names(temp) <- row.names(count_matrix_Normalized)
   temp2 <- as.data.frame(apply(temp, 1, mean))
   temp2$genes <- row.names(temp2)
   colnames(temp2) <- c("averagelogCPM","ID")
-  
   
   # Separate zeros and non-zeros in all columns
   ## Expressed in all samples

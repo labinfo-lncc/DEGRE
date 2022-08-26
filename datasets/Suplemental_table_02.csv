@@ -1,0 +1,16 @@
+"","biological_process","qty_genes"
+"1","cellular process (GO:0009987)",65
+"14","metabolic process (GO:0008152)",41
+"7","biological regulation (GO:0065007)",39
+"8","response to stimulus (GO:0050896)",19
+"9","signaling (GO:0023052)",16
+"4","localization (GO:0051179)",11
+"10","developmental process (GO:0032502)",4
+"11","multicellular organismal process (GO:0032501)",4
+"15","immune system process (GO:0002376)",4
+"3","reproductive process (GO:0022414)",3
+"6","reproduction (GO:0000003)",3
+"12","locomotion (GO:0040011)",3
+"5","biological process involved in interspecies interaction between organisms (GO:0044419)",2
+"2","biological phase (GO:0044848)",1
+"13","biological adhesion (GO:0022610)",1

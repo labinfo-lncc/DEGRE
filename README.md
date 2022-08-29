@@ -4,7 +4,7 @@
 
 ![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/DEGRE%20logo2.png?raw=true)
 
-The DEGRE is an R package that aims the identification of Differential Expression Genes (DEGs) among two groups considering the insertion of the random effects in the experimental design matrix. These effects are identified previously in the experimental design. The package has the implementation of pre-processing steps to clean the count matrix of the gene reads, and it uses the Generalized Linear Mixed Model (GLMM) with the negative binomial distribution to infer the DEGs.
+The DEGRE is an R package that aims the identification of Differential Expression Genes (DEGs) between two groups considering the insertion of the random effects in the experimental design matrix. These effects are identified previously in the experimental design. The package has the implementation of pre-processing steps to clean the count matrix of the gene reads, and it uses the Generalized Linear Mixed Model (GLMM) with the negative binomial distribution to infer the DEGs.
 
 
 

@@ -109,7 +109,7 @@ The output of the DEGRE function (represented as `results` above) is a `data.fra
 
 - ID - the gene IDs that the user entered in the `count_matrix`. 
 - log2FC - the log2 fold-change.
-- *P*-value - the *P*-value computed for each gene in the Wald test (confirmar o nome certinho).
+- *P*-value - the *P*-value computed for each gene in the Wald test.
 - *Q*-value - the corrected *P*-values using BH or BON methods.
 - averagelogCPM - the log2CPM for each gene.
 
@@ -276,7 +276,7 @@ colnames(gene)[1] <- "ID"
 DEGREresults_gene_name <- merge(results, gene, by = "ID")
 ```
 
-The data frame `DEGREresults_gene_name` now have the gene names from ensembl and all the informations of the DEGRE function output.
+The data frame `DEGREresults_gene_name` now has the gene names from ensembl and all the informations of the DEGRE function output.
 
 
 

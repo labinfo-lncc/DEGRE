@@ -40,7 +40,7 @@ citation("DEGRE")
 
 
 
-## Instalation of the DEGRE package
+## Installation of the DEGRE package
 
 To install the DEGRE package, you must run:
 

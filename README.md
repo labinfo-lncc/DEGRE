@@ -74,7 +74,7 @@ Attention: if you are having trouble with the glmmTMB package, you can try remov
 
 ## Quick start
 
-To use this package, you must have a matrix containing the read counts for each gene in each biological replicates and a design matrix containing sample information. In the count matrix, the rows represent genes, while the columns represent the biological replicates of both experimental conditions. In the design matrix, the columns represent the relevant information of the samples.
+To use this package, you must have a matrix containing the read counts for each gene in each biological replicate and a design matrix containing sample information. In the count matrix, the rows represent genes, while the columns represent the biological replicates of both experimental conditions. In the design matrix, the columns represent the relevant information of the samples.
 
 
 To start using the package, you need to load the library:

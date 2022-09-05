@@ -4,7 +4,7 @@
 
 ![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/DEGRE%20logo2.png?raw=true)
 
-The DEGRE is an R package that aims the identification of Differential Expression Genes (DEGs) between two groups considering the insertion of the random effects in the experimental design matrix. These effects are identified previously in the experimental design. The package has the implementation of pre-processing steps to clean the count matrix of the gene reads, and it uses the Generalized Linear Mixed Model (GLMM) with the negative binomial distribution to infer the DEGs.
+The DEGRE is an R package that aims to identify Differential Expression Genes (DEGs) between two groups and considers the insertion of the random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For this purpose, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
 
 
 
@@ -14,9 +14,9 @@ The repository for DEGRE is at GitHub on the www.websitehere.com. In this websit
 
 ## Citation
 
-The DEGRE package is under publication. If you use it in your research, please cite it when available.
+The DEGRE package is under publication. Please cite it if you use it in your research.
 
-You can cite it as here below:
+You can cite it here below:
 
 ```R
 citation("DEGRE")
@@ -54,7 +54,7 @@ install_github("labinfo-lncc/DEGRE",
 
 ### Needed packages
 
-The DEGRE package has functions that uses the following packages:
+The DEGRE package has several functions from the following packages:
 
 - parglm, version 0.1.7
 - glmmTMB, version 1.1.3
@@ -68,15 +68,14 @@ The DEGRE package has functions that uses the following packages:
 - ggpubr, version  0.4.0
 - ggrepel, version 0.9.1
 
-Attention: if you are having troubles with the glmmTMB package, you can try to remove it and re-install, it may work properly.
+Attention: if you are having trouble with the glmmTMB package, you can try removing and reinstalling it.
 
 
 
 ## Quick start
 
-The DEGs are inferred according to its read counts among the replicates between two groups and the quantitative differences of the read counts are inferred to contribute in differential expression.
+To use this package, you must have a matrix containing the read counts for each gene in each biological replicates and a design matrix containing sample information. In the count matrix, the rows represent genes, while the columns represent the biological replicates of both experimental conditions. In the design matrix, the columns represent the relevant information of the samples.
 
-To use this package you must have a count matrix that contains the read counts for each gene in each of the sample replicates and also a design matrix that contains sample informations. In the count matrix, the genes are represented by the rows and the replicates are represented by the columns. In the design matrix, the columns represent the relevant information of the samples. 
 
 To start using the package, you need to load the library:
 
@@ -84,7 +83,7 @@ To start using the package, you need to load the library:
 library("DEGRE")
 ```
 
-Then you can apply the DEGRE function:
+Then you can apply the DEGRE's quick start function:
 
 ```R
 # Reading the count matrix and the design matrix for an example:
@@ -103,21 +102,21 @@ results <- DEGRE(count_matrix = tab,
 
 
 
-## Output of the DEGRE function
+## The output of the DEGRE function
 
-The output of the DEGRE function (represented as `results` above) is a `data.frame` object. This object has the columns:
+Its output (represented as the `results` above) is a `data.frame` object. This object has the columns:
 
-- ID - the gene IDs that the user entered in the `count_matrix`. 
+- ID - the gene IDs that the user inserted in the `count_matrix`. 
 - log2FC - the log2 fold-change.
 - *P*-value - the *P*-value computed for each gene in the Wald test.
-- *Q*-value - the corrected *P*-values using BH or BON methods.
+- *Q*-value - the corrected *P*-values using Benjamini Hochberg (BH) or Bonferroni (BON) methods.
 - averagelogCPM - the log2CPM for each gene.
 
 
 
 ## More about the DEGRE function
 
-The DEGRE function has the following arguments:
+This function has the following arguments:
 
 ```R
 results <- DEGRE(count_matrix, 
@@ -126,33 +125,33 @@ results <- DEGRE(count_matrix,
                  p_value_adjustment)
 ```
 
-As you can see, the DEGRE function has important parameter in which are described below:
+As you can see, the DEGRE function has important parameters, which are described below:
 
-- `count_matrix` - a `data.frame` object. It receives the matrix with the reads for each gene as input. The rows are the gene IDs and the columns are the two groups with the identification of the replicates.
-- `design_matrix` - a `data.frame` object. It receives the experimental design matrix. The sample names must be identified in the first column. This matrix can also have more columns with informations for the fixed and the random effects for the samples.
-- `formula` - it receives the fixed and random effects as a quotation mark argument.
-- `p_value_adjustment` - All the *P*-values computed must be corrected and the DEGRE package offers two possibilities for this *P*-value correction: "BH" (Benjamini-Hochberg) correction, in which it is the default for the package, and "BON" (Bonferroni) correction.
+- `count_matrix` - a `data.frame` object. It receives the matrix as input.
+- `design_matrix` - a `data.frame` object. It receives the experimental design matrix. The sample names must be identified in the first column. This matrix can also have more columns with information for the fixed and the random effects for the samples.
+- `formula` - it receives fixed and random effects descriptions.
+- `p_value_adjustment` - All the *P*-values computed must be corrected and the DEGRE package offers two possibilities: "BH" (Benjamini-Hochberg) correction (default) and "BON" (Bonferroni) correction.
 
 
-## What are the fixed and random effects?
-The fixed effects can be understood as variables which are easier to control in the experimental design. Let's suppose we are doing an RNA-Seq experiment to identify differentially expressed genes in whole blood between a group of people that receives a specific treatment compared to a group of people that receive only water instead of the medicine. The illustration of this comparison can be seen below:
+## A practical example of fixed and random effects
+In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group that receives a specific treatment and a group of people that receive only water instead of medicine. The illustration of this comparison can be seen below:
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol.png" width="650">
 
-Notice that we know that all people in group A received the treatment while all people of group B received only water, this kind of comparison in which we can control the effect between both groups comprehends the fixed effects.
+Notice that we know that all people in group A received the treatment. In contrast, all people in group B received only water. This kind of comparison in which we can control the effect between both groups comprehends the fixed effects.
 
-Now suppose that in the both groups we have some heterogeneity related to the biological sex, in which there are men and women in different proportions in the both groups. The illustration of this can be seen below:
+Suppose that in both groups, we have some heterogeneity related to the biological sex, in which there are men and women in different proportions. The illustration of this can be seen below:
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="650">
 
-This kind of effect in which we did not control is related to the random effect. Other examples of random effects that can be harder to control may involve the different concentration of biochemical molecules inside of the both groups and the concentration of these molecules involved in the gene expression.
+This kind of effect which we did not control in our experiment planning, is related to the random effect. Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups and the concentration of these molecules implicating the gene expression.
 
 
 ## Some applications you can do!
 
 ### Filtering the gene IDs from the final data frame
 
-Here follows some codes you can apply to filter specific gene IDs from the final data frame.
+Here are some codes you can apply to filter specific gene IDs.
 
 Suppose you want to filter the results related to the ENSMUSG00000000881 gene ID. Then, you can try:
 
@@ -161,7 +160,7 @@ filtering_gene <- results[results$ID == "ENSMUSG00000000881",]
 print(filtering_gene)
 ```
 
-Applying this filtering step you will get the following result:
+Applying this filtering step, you will get the following result:
 
 ```R
 #                 ID   log2FC              P-value      Q-value
@@ -179,7 +178,7 @@ gene_IDs_to_filter <- c("ENSMUSG00000000881",
                         "ENSMUSG00000015484")
 ```
 
-We can use the merge function to get the genes results. First consider to convert it into a `data.frame` object:
+We can use the merge function to get the gene results. First, consider converting it into data.frame object:
 
 ```R
 gene_IDs_to_filter <- data.frame(ID = gene_IDs_to_filter)
@@ -213,15 +212,15 @@ print(filtering_gene)
 
 ### Getting the results from a *Q*-value cutoff
 
-To filter the *Q*-value from a specific cutoff, you can try the following:
+To filter the *Q*-value from a specific cutoff, you can do the following:
 
 ```R
 results_q_value_cutoff <- results[results$`Q-value` < 0.05,]
 ```
 
-Here we filtered based on the 5% of significance as a cutoff, but you can change it in your way. 
+Here we filtered based on the 5% of significance as a cutoff, but you can change it.
 
-To check if it works properly, you can check both the dimensions of `results` and `results_q_value_cutoff` data frames, but you can also try:
+To check if it works properly, you can check the maximum *Q*-value from `results` and `results_q_value_cutoff`:
 
 ```R
 max(results_q_value_cutoff$`Q-value`)
@@ -241,13 +240,13 @@ max(results$`Q-value`)
 # 0.9519065
 ```
 
-In which it shows to you that the filter works properly.
+In which it shows you that the filter works properly.
 
 
 
 ### Getting the gene annotation from biomaRt package
 
-If you only have the gene IDs but want to get the gene names, you can do it using the biomaRt package to get ensembl informations.
+If you only have the gene IDs but want the gene names, you can use the biomaRt package to get ensembl information.
 
 First, if you don't have the biomaRt installed, please install it following the recommendations [here](https://bioconductor.org/packages/release/bioc/html/biomaRt.html).
 
@@ -257,7 +256,7 @@ Then, you must do the library:
 library("biomaRt")
 ```
 
-Using the following code you can get the gene names from the *Mus musculus* specie:
+Using the following code, you can get the gene names from the *Mus musculus* species:
 
 ```R
 ensembl <- useMart("ensembl", 
@@ -269,14 +268,14 @@ gene <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
               mart = ensembl)
 ```
 
-To bring the DEGRE output informations, you can use the merge function. Attention: you need to rename the columns of the `gene` data frame in a way that the columns with the gene IDs will have the same name in both data frames: `results`, from the DEGRE function (DEGRE package), and `gene`, from the getBM function (biomaRt package). 
+You can use the merge function to bring the DEGRE output information of the genes. Attention: you need to rename the columns of the gene data frame in a way that the column with the gene IDs will have the same name in both data frames: `results` from the DEGRE function (DEGRE package) and `gene` from the getBM function (biomaRt package).
 
 ```R
 colnames(gene)[1] <- "ID"
 DEGREresults_gene_name <- merge(results, gene, by = "ID")
 ```
 
-The data frame `DEGREresults_gene_name` now has the gene names from ensembl and all the informations of the DEGRE function output.
+The data frame `DEGREresults_gene_name` now has the gene names from ensembl and all the information of the DEGRE function output.
 
 
 
@@ -284,7 +283,7 @@ The data frame `DEGREresults_gene_name` now has the gene names from ensembl and 
 
 ### Volcano plot
 
-The DEGRE package has the VolcanoDEGRE function to get a visualization of the proportion of downregulated and upregulated genes applying a log2FC cutoff.
+The DEGRE package has the VolcanoDEGRE function to visualize the proportion of downregulated and upregulated genes by applying a log2FC cutoff.
 
 Here follows the quick start of the function with default parameters:
 
@@ -304,7 +303,7 @@ VolcanoDEGRE(results = results,
              legend.title = "Regulation")
 ```
 
-At the `results` argument, you have to specify the data frame you want to plot. The following result is shown below.
+In the `results` argument, you must specify the data frame you want to plot. The following result is shown below.
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Volcano_DEGRE_example.png" width="500">
 
@@ -325,9 +324,9 @@ dev.off()
 
 Be free to change any of the arguments on the VolcanoDEGRE function.
 
-The explained parameters is described below:
+The explained parameters are described below:
 
-- `results` - a `data.frame` object. It receives the output of the DEGRE function, filtered by you or not, as input.
+- `results` - a `data.frame` object. It receives the output of the DEGRE function, filtered or not, as input.
 
 - `log2FC_cutoff` - it stores the cutoff of the log2FoldChange.
 
@@ -373,7 +372,7 @@ BarGraphDEGRE(results = results,
                      legend.title = "Regulation")
 ```
 
-At the `results` argument, you have to specify the data frame you want to plot. The following result is shown below.
+At the `results` argument, you must specify the data frame you want to plot. The following result is shown below.
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/BarPlot_DEGRE_example.png" width="500">
 
@@ -394,16 +393,16 @@ dev.off()
 
 Be free to change any of the arguments on the BarGraphDEGRE function.
 
-The explained parameters is described below:
+The explained parameters are described below:
 
-- `results` - a `data.frame` object. It receives the output of the DEGRE function, filtered by you or not, as input.
+- `results` - a `data.frame` object. It receives the output of the DEGRE function, filtered or not, as input.
 - `log2FC_cutoff` - it stores the cutoff of the log2FoldChange.
-- `downregulated_color` - the color of the bar related to the number of downregulated genes. The default is "coral2".
-- `upregulated_color` - the color of the bar related to the number of upregulated genes. The default is "cornflowerblue".
+- `downregulated_color` - the bar color related to the number of downregulated genes. The default is "coral2".
+- `upregulated_color` - the bar color related to the number of upregulated genes. The default is "cornflowerblue".
 - `xlab` - the x lab text. The default is "Regulation".
 - `ylab` - the y lab text. The default is "Number of genes".
-- `font.x` - the font size of the x axis..
-- `font.y` - the font size of the y axis..
+- `font.x` - the font size of the x axis.
+- `font.y` - the font size of the y axis.
 - `font.tickslab` - the font size of the ticks lab.
 - `legend_position` - you need to specify here the position of the legend. The default is "right".
 - `legend.title` - the title of the legend.

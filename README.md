@@ -134,7 +134,7 @@ As you can see, the DEGRE function has important parameters, which are described
 
 
 ## A practical example of fixed and random effects
-In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group that receives a specific treatment and a group of people that receive only water instead of medicine. The illustration of this comparison can be seen below:
+In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group of people that receives a specific treatment and a group that receive only water instead of medicine. The illustration of this comparison can be seen below:
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol.png" width="650">
 

@@ -160,7 +160,7 @@ filtering_gene <- results[results$ID == "ENSMUSG00000000881",]
 print(filtering_gene)
 ```
 
-Applying this filtering step, you will get the following result:
+Applying this filtering step, you get the following result:
 
 ```R
 #                 ID   log2FC              P-value      Q-value

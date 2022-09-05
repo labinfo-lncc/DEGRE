@@ -144,7 +144,7 @@ Suppose that in both groups, we have some heterogeneity related to the biologica
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="650">
 
-This kind of effect which we did not control in our experiment planning, is related to the random effect. Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups and the concentration of these molecules implicating the gene expression.
+This kind of effect which we did not control in our experiment planning is related to the random effect. Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups implicating in the gene expression.
 
 
 ## Some applications you can do!

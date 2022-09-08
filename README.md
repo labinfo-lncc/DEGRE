@@ -25,12 +25,12 @@ citation("DEGRE")
 ```R
 # To cite package ‘DEGRE’ in publications use:
 #   Douglas Terra Machado (2022). DEGRE: Identification of Differentially Expressed Genes
-#   with Random Effects. R package version 1.0.
+#   with Fixed and Random Effects. R package version 1.0.
 # A BibTeX entry for LaTeX users is
 #   @Manual{,
-#     title = {DEGRE: Identification of Differentially Expressed Genes with Random
+#     title = {DEGRE: Identification of Differentially Expressed Genes with Fixed and Random
 # Effects},
-#     author = {Douglas Terra Machado},
+#     author = {Douglas Terra Machado, Otávio José Bernardes Brustolini, Yasmmin Côrtes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro Vasconcelos},
 #     year = {2022},
 #     note = {R package version 1.0},
 #   }

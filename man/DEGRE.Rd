@@ -56,13 +56,6 @@ Manuscript is being written.
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 
-#Otavio, escrevi isso abaixo:
-#results <- DEGRE(count_matrix = count_matrix_for_example,
-#                 num_reps = 2,
-#                 p_value_adjustment = "BH",
-#                 design_matrix = design_matrix_for_example,
-#                 formula = "condition + (1|sex)")
-
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 }

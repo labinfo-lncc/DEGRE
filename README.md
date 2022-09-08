@@ -8,7 +8,7 @@ The DEGRE is an R package that aims to identify Differential Expression Genes (D
 
 
 
-The repository for DEGRE is at GitHub on the www.websitehere.com. In this website you can report a bug and get help.
+The repository for DEGRE is at GitHub on the https://github.com/labinfo-lncc/DEGRE. In this website you can report a bug and get help.
 
 
 

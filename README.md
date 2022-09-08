@@ -30,7 +30,7 @@ citation("DEGRE")
 #   @Manual{,
 #     title = {DEGRE: Identification of Differentially Expressed Genes with Fixed and Random
 # Effects},
-#     author = {Douglas Terra Machado, Otávio José Bernardes Brustolini, Yasmmin Côrtes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro Vasconcelos},
+#     author = {Douglas Terra Machado, Otavio Jose Bernardes Brustolini, Yasmmin Cortes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro Vasconcelos},
 #     year = {2022},
 #     note = {R package version 1.0},
 #   }

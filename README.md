@@ -1,10 +1,10 @@
-# Inferring Differential Expression Genes with Random Effects using the DEGRE R package
+# Inferring differentially expressed genes using generalized linear mixed models in the DEGRE R package
 
 ## Scope
 
 ![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/DEGRE%20logo2.png?raw=true)
 
-The DEGRE is an R package that aims to identify Differential Expression Genes (DEGs) between two groups and considers the insertion of the random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For this purpose, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
+The DEGRE is an R package that aims to identify Differentially Expressed Genes (DEGs) in a pairwise manner and considers the insertion of the individuals' random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For this purpose, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
 
 
 
@@ -99,6 +99,11 @@ results <- DEGRE(count_matrix = tab,
 
 ```
 
+Obs.: The time spent running the quick start was XXXX.
+System specifications:
+- Hardware: Acer Nitro AN515-44
+- RAM: 16GB
+- Processor: AMD® Ryzen 7 4800h with radeon graphics × 16
 
 
 ## The output of the DEGRE function

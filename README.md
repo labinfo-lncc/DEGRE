@@ -103,7 +103,7 @@ Obs.: The time spent running the quick start was XXXX.
 System specifications:
 - Processor: AMD® Ryzen 7 4800h with radeon graphics × 16
 - RAM: 16GB
-- HD 1TB
+- HD: 1TB
 
 
 ## The output of the DEGRE function

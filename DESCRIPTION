@@ -1,6 +1,6 @@
 Package: DEGRE
 Type: Package
-Title: Identification of Differentially Expressed Genes with Fixed and Random Effects
+Title: Inferring differentially expressed genes using generalized linear mixed models in the DEGRE R package
 Version: 1.0
 Date: 2022-04-27
 Author: Douglas Terra Machado, Otavio Jose Bernardes Brustolini, Yasmmin Cortes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro Vasconcelos
@@ -8,6 +8,6 @@ Maintainer: Douglas Terra Machado <dougterra@gmail.com>
 Description: The DEGRE is an R package constructed to identify Differentially Expressed Genes (DEGs) in RNA-Seq experiments with fixed and random effects. These effects are identified previously in the experimental design matrix. The DEGRE tool has the implementation of pre-processing steps to clean the count matrix of the gene reads, and it uses the Generalized Linear Mixed Model with the negative binomial distribution to infer the DEGs.
 License: Artistic-2.0
 Depends: R (>= 4.0)
-Imports: parglm, glmmTMB, foreach, car, tibble, gridExtra, dplyr, ggplot2, ggpubr, ggrepel
+Imports: parglm, glmmTMB, foreach, tibble, dplyr, ggplot2, ggpubr, ggrepel
 NeedsCompilation: no
 Packaged: 2022-04-26 19:36:52 UTC

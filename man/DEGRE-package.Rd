@@ -13,7 +13,7 @@
 The DESCRIPTION file:
 \packageDESCRIPTION{DEGRE}
 \packageIndices{DEGRE}
-The DEGRE package has the function DEGRE with the arguments: count_matrix, num_reps, p_value_adjustment = "BH", formula, design_matrix.
+The DEGRE package has the function DEGRE with the arguments: count_matrix, p_value_adjustment = "BH", formula, design_matrix.
 The user needs to have the count matrix of the genes and the design matrix as data frames to enter in the respective arguments.
 }
 \author{

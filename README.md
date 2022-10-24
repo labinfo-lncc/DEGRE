@@ -59,9 +59,7 @@ The DEGRE package has several functions from the following packages:
 - glmmTMB, version 1.1.3
 - doParallel, version 1.0.17
 - foreach, version 1.5.2
-- car, version 3.0.12
 - tibble, version 3.1.6
-- gridExtra, version 2.3
 - dplyr, version 1.0.9
 - ggplot2, version 3.3.5
 - ggpubr, version  0.4.0

@@ -132,13 +132,13 @@ As you can see, the DEGRE function has important parameters, which are described
 ## A practical example of fixed and random effects
 In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group of people that receives a specific treatment and a group that receive only water instead of medicine. The illustration of this comparison can be seen below:
 
-<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol.png" width="650">
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/man/Github - fixed and random effects_FIGtreatcontrol.png" width="650">
 
 Notice that we know that all people in group A received the treatment. In contrast, all people in group B received only water. This kind of comparison in which we can control the effect between both groups comprehends the fixed effects.
 
 Suppose that in both groups, we have some heterogeneity related to the biological sex, in which there are men and women in different proportions. The illustration of this can be seen below:
 
-<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="650">
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/man/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="650">
 
 This kind of effect can be handle as a random effect to eliminate any potential bias related with variations between males and females¹²³. Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups implicating in the gene expression.
 
@@ -307,7 +307,7 @@ VolcanoDEGRE(results = results,
 
 In the `results` argument, you must specify the data frame you want to plot. The following result is shown below.
 
-<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Volcano_DEGRE_example.png" width="500">
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/man/Volcano_DEGRE_example.png" width="500">
 
 We recommend you to save it using the png function with the following parameters:
 
@@ -376,7 +376,7 @@ BarGraphDEGRE(results = results,
 
 At the `results` argument, you must specify the data frame you want to plot. The following result is shown below.
 
-<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/BarPlot_DEGRE_example.png" width="500">
+<img src="https://github.com/labinfo-lncc/DEGRE/blob/main/man/BarPlot_DEGRE_example.png" width="500">
 
 We recommend you to save it using the png function with the following parameters:
 

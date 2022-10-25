@@ -140,7 +140,13 @@ Suppose that in both groups, we have some heterogeneity related to the biologica
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/Github - fixed and random effects_FIGtreatcontrol_withbiologicalsex.png" width="650">
 
-This kind of effect which we did not control in our experiment planning is related to the random effect. Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups implicating in the gene expression.
+This kind of effect, which we can adjust for sex difference, can be handle as a random effect (1,2,3). Other examples of random effects that can be harder to control may involve the different concentrations of biochemical molecules inside both groups implicating in the gene expression.
+
+1. Thoral, Elisa, Quentin Queiros, Damien Roussel, Gilbert Dutto, Eric Gasset, David J. McKenzie, Caroline Romestaing, Jean-Marc Fromentin, Claire Saraux, and Loïc Teulier. 2021. “Changes in Foraging Mode Caused by a Decline in Prey Size Have Major Bioenergetic Consequences for a Small Pelagic Fish.” The Journal of Animal Ecology 90 (10): 2289–2301.
+
+2. Kleyheeg, Erik, Bart A. Nolet, Sandra Otero-Ojea, and Merel B. Soons. 2018. “A Mechanistic Assessment of the Relationship between Gut Morphology and Endozoochorous Seed Dispersal by Waterfowl.” Ecology and Evolution 8 (22): 10857–67.
+
+3. Donovan, Margaret K. R., Agnieszka D’Antonio-Chronowska, Matteo D’Antonio, and Kelly A. Frazer. 2020. “Cellular Deconvolution of GTEx Tissues Powers Discovery of Disease and Cell-Type Associated Regulatory Variants.” Nature Communications 11 (1): 955.
 
 
 ## Some applications you can do!

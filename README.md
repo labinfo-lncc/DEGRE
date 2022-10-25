@@ -2,7 +2,7 @@
 
 ## Scope
 
-![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/DEGRE%20logo2.png?raw=true)
+![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/man/DEGRE%20logo2.png?raw=true)
 
 The DEGRE is an R package that aims to identify Differentially Expressed Genes (DEGs) in a pairwise manner and considers the insertion of the individuals' random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For this purpose, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
 

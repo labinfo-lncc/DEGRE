@@ -13,7 +13,6 @@
 #' # Reading the count matrix and the design matrix for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
-#' row.names(tab) <- tab[,1]; tab <- tab[,-1]
 #' des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
 #' # Running DEGRE function:
 #' results <- DEGRE(count_matrix = tab,

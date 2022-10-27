@@ -10,6 +10,7 @@
 #' @return dataframe object
 #'
 #' @examples
+#' \dontrun{
 #' # Reading the count matrix and the design matrix for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
@@ -19,7 +20,7 @@
 #'                  p_value_adjustment = "BH",
 #'                  design_matrix = des,
 #'                  formula = "condition + (1|sex)")
-#'
+#' }
 #' @import stats glmmTMB foreach parglm tibble ggplot2 ggpubr ggrepel utils car
 #' @importFrom car Anova
 #' @importFrom dplyr mutate_all

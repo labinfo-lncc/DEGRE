@@ -16,7 +16,7 @@
 #' @examples
 #' # Reading an Rda file for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
-#' load("results_DEGRE_example.Rda")
+#' load(file.path(dir,"results_DEGRE_example.Rda"))
 #' # Running the VolcanoDEGRE function
 #' VolcanoDEGRE(results = results_DEGRE_example,
 #'           log2FC_cutoff = 1,

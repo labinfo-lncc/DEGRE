@@ -16,7 +16,6 @@
 #' # Reading an Rda file for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
-#' row.names(results_DEGRE_example) <- results_DEGRE_example[,1]; results_DEGRE_example <- results_DEGRE_example[,-1]
 #' # Running the BarGraphDEGRE function
 #' BarGraphDEGRE(results = results_DEGRE_example,
 #'            log2FC_cutoff = 1,

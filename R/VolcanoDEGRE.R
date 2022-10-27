@@ -14,18 +14,11 @@
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
 #' @examples
-#' # Reading the count matrix and the design matrix for an example:
-#' dir <- system.file("data", package = "DEGRE")
-#' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
-#' row.names(tab) <- tab[,1]; tab <- tab[,-1]
-#' des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
-#' # Running DEGRE function:
-#' results <- DEGRE(count_matrix = tab,
-#'                p_value_adjustment = "BH",
-#'                design_matrix = des,
-#'                formula = "condition + (1|sex)")
+#' # Reading an Rda file for an example:
+#' dir <- system.file("extdata", package = "DEGRE")
+#' load("results_DEGRE_example.Rda")
 #' # Running the VolcanoDEGRE function
-#' VolcanoDEGRE(results = results,
+#' VolcanoDEGRE(results = results_DEGRE_example,
 #'           log2FC_cutoff = 1,
 #'           padj = 0.05,
 #'           font.x = 10,

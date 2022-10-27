@@ -45,17 +45,11 @@ BarGraphDEGRE(
 Create a bar plot showing the number of downregulated and upregulated genes.
 }
 \examples{
+# Reading a CSV file for an example:
 dir <- system.file("extdata", package = "DEGRE")
-tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
-row.names(tab) <- tab[,1]; tab <- tab[,-1]
-des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
-# Running DEGRE function:
-results <- DEGRE(count_matrix = tab,
-             p_value_adjustment = "BH",
-             design_matrix = des,
-             formula = "condition + (1|sex)")
+results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
 # Running the BarGraphDEGRE function
-BarGraphDEGRE(results = results,
+BarGraphDEGRE(results = results_DEGRE_example,
            log2FC_cutoff = 1,
            downregulated_color = "coral2",
            upregulated_color = "cornflowerblue",

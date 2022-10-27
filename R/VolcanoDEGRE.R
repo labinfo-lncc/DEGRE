@@ -14,7 +14,7 @@
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
 #' @examples
-#' # Reading an Rda file for an example:
+#' # Reading a CSV file for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
 #' # Running the VolcanoDEGRE function
@@ -53,10 +53,13 @@ VolcanoDEGRE <- function (results,
   results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
   results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
 
-  graph <- ggplot(data=results, aes(x=results$log2FC, y=-log10(results$`Q-value`), col=results$diffexpressed)) +
+  log2FC <- results$log2FC
+  lpval <- -log10(results$`Q.value`)
+  diffexpressed <- results$diffexpressed
+
+  graph <- ggplot(data=results, aes(x=log2FC, y=lpval, col=diffexpressed)) +
     geom_point() +
     theme_minimal() +
-    geom_text_repel() +
     scale_color_manual(values=c(paste0(downregulated_color), "grey", paste0(upregulated_color))) +
     geom_vline(xintercept=c(-log2FC_cutoff, log2FC_cutoff), col="red") +
     geom_hline(yintercept=-log10(padj), col="red")

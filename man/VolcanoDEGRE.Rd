@@ -47,3 +47,22 @@ VolcanoDEGRE(
 \description{
 Create a volcano plot to visualize the proportion of downregulated and upregulated genes by applying a log2FC cutoff.
 }
+\examples{
+# Reading a CSV file for an example:
+dir <- system.file("extdata", package = "DEGRE")
+results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
+# Running the VolcanoDEGRE function
+VolcanoDEGRE(results = results_DEGRE_example,
+          log2FC_cutoff = 1,
+          padj = 0.05,
+          font.x = 10,
+          font.y = 10,
+          font.tickslab = 10,
+          downregulated_color = "coral2",
+          upregulated_color = "cornflowerblue",
+          xlab = "log2Foldchange",
+          ylab = "-log10(P-value)",
+          legend_position = "right",
+          legend.title = "Regulation")
+
+}

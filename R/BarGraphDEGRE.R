@@ -13,7 +13,7 @@
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
 #' @examples
-#' # Reading an Rda file for an example:
+#' # Reading a CSV file for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
 #' # Running the BarGraphDEGRE function
@@ -71,7 +71,10 @@ BarGraphDEGRE <- function(results,
   else
     stop("The log2FC cutoff you enter does not bring any results.")
 
-  graph <- ggplot(data = ds_bargraph, aes(x = ds_bargraph$reg, fill = ds_bargraph$reg))+
+  reg <- ds_bargraph$reg
+
+
+  graph <- ggplot(data = ds_bargraph, aes(x = reg, fill = reg))+
     geom_bar()+
     scale_fill_manual(values = c(downregulated_color, upregulated_color))
 

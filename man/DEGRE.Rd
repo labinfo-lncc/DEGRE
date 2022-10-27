@@ -21,3 +21,16 @@ dataframe object
 \description{
 The DEGRE function acts inferring the differentially expressed genes fitting them using generalized linear mixed models and then applies the Wald test to the regression coefficients. It offers Benjamini-Hochberg or Bonferroni P-values techniques to adjust the P-values.
 }
+\examples{
+# Reading the count matrix and the design matrix for an example:
+dir <- system.file("extdata", package = "DEGRE")
+tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
+row.names(tab) <- tab[,1]; tab <- tab[,-1]
+des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
+# Running DEGRE function:
+results <- DEGRE(count_matrix = tab,
+                 p_value_adjustment = "BH",
+                 design_matrix = des,
+                 formula = "condition + (1|sex)")
+
+}

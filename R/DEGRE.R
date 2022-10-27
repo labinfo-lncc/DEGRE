@@ -9,9 +9,9 @@
 #'
 #' @return dataframe object
 #'
-#' @example
+#' @examples
 #' # Reading the count matrix and the design matrix for an example:
-#' dir <- system.file("data", package = "DEGRE")
+#' dir <- system.file("extdata", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
 #' row.names(tab) <- tab[,1]; tab <- tab[,-1]
 #' des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
@@ -21,7 +21,10 @@
 #'                  design_matrix = des,
 #'                  formula = "condition + (1|sex)")
 #'
-#'  @export
+#' @import stats glmmTMB foreach parglm tibble ggplot2 ggpubr ggrepel utils car
+#' @importFrom car Anova
+#' @importFrom dplyr mutate_all
+#' @export
 DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matrix){
   ### Pre-processing steps
   # Scale correction
@@ -61,20 +64,6 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
 
     return(Sj_median_log_sum_exp_final)
   }
-
-  #calculates GLMM
-  calcglmm <- function(i, count_matrix_bip_overdisp) {
-    tmp<-glmmTMB:::Anova.glmmTMB(glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)),
-                                         data = count_matrix_bip_overdisp, family=nbinom2,
-                                         REML = TRUE,
-                                         control=glmmTMBControl( optimizer=optim,
-                                                                 optArgs=list(method="BFGS"))),
-                                 type=c("II", "III", 2, 3))[3][[1]]
-
-    return(c(names$X1[i], tmp))
-  }
-
-
 
   ### Checking steps in the matrices
   # Check if the user has the count and the design matrices
@@ -194,6 +183,19 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
 
   # GLMM
   count_matrix_bip_overdisp <- as.data.frame(t(without_zero_without_low_count))
+
+  #calculates GLMM
+  calcglmm <- function(i, count_matrix_bip_overdisp) {
+    tmp <- car::Anova (glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)),
+                                         data = count_matrix_bip_overdisp, family=nbinom2,
+                                         REML = TRUE,
+                                         control=glmmTMBControl( optimizer=optim,
+                                                                 optArgs=list(method="BFGS"))),
+                                 type=c("II", "III", 2, 3))[3][[1]]
+
+    return(c(names$X1[i], tmp))
+  }
+
 
   # For the GLMM: create the count matrix with the features of the design matrix
   count_matrix_bip_overdisp$sample <- rownames(count_matrix_bip_overdisp)

@@ -12,9 +12,8 @@
 #' @param legend_position you need to specify here the position of the legend. The default is "right".
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
-#' @example
-#' # Reading the count matrix and the design matrix for an example:
-#' dir <- system.file("data", package = "DEGRE")
+#' @examples
+#' dir <- system.file("extdata", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))
 #' row.names(tab) <- tab[,1]; tab <- tab[,-1]
 #' des <- read.csv(file.path(dir,"design_matrix_for_example.csv"))
@@ -60,34 +59,25 @@ BarGraphDEGRE <- function(results,
   colnames(results) <- c("ID","log2FC","P_value","Q_value")
 
   filter_upregulated <- results[results$log2FC >= log2FC_cutoff,]
-  if(dim(filter_upregulated)[1] == 0){
-    filter_upregulated <- data.frame(ID = NULL,
-                                     log2FC = NULL,
-                                     P_value = NULL,
-                                     Q_value = NULL,
-                                     reg = NULL)
-  } else{
-    filter_upregulated$reg <- "Upregulated"
-  }
-
   filter_downregulated <- results[results$log2FC <= -log2FC_cutoff,]
-  if(dim(filter_downregulated)[1] == 0){
-    filter_downregulated <- data.frame(ID = NULL,
-                                       log2FC = NULL,
-                                       P_value = NULL,
-                                       Q_value = NULL,
-                                       reg = NULL)
-  } else{
-    filter_downregulated$reg <- "Downregulated"
+  
+  if ( (dim(filter_upregulated)[1] != 0)  & (dim(filter_downregulated)[1] != 0) ){
+	filter_upregulated$reg <- "Upregulated"
+	filter_downregulated$reg <- "Downregulated"
+  	ds_bargraph <- rbind(filter_upregulated, filter_downregulated)
   }
-
-  ds_bargraph <- rbind(filter_upregulated, filter_downregulated)
-
-  if(dim(ds_bargraph)[1] == 0){
+  else if (dim(filter_upregulated)[1] != 0){
+	filter_upregulated$reg <- "Upregulated"
+	ds_bargraph <- filter_upregulated
+  }
+  else if (dim(filter_downregulated)[1] != 0){
+	filter_downregulated$reg <- "Downregulated"
+	ds_bargraph <- filter_downregulated
+  }
+  else
     stop("The log2FC cutoff you enter does not bring any results.")
-  }
 
-  graph <- ggplot(data = ds_bargraph, aes(x = reg, fill = reg))+
+  graph <- ggplot(data = ds_bargraph, aes(x = ds_bargraph$reg, fill = ds_bargraph$reg))+
     geom_bar()+
     scale_fill_manual(values = c(downregulated_color, upregulated_color))
 

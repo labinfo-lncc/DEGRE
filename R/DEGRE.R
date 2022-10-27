@@ -186,7 +186,7 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
 
   #calculates GLMM
   calcglmm <- function(i, count_matrix_bip_overdisp) {
-    tmp <- car::Anova (glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)),
+    tmp <- Anova (glmmTMB(as.formula(paste0("count_matrix_bip_overdisp[[i]] ~ ", formula)),
                                          data = count_matrix_bip_overdisp, family=nbinom2,
                                          REML = TRUE,
                                          control=glmmTMBControl( optimizer=optim,

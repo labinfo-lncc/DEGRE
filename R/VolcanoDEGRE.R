@@ -13,7 +13,7 @@
 #' @param legend_position you need to specify here the position of the legend. The default is "right".
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
-#' @example
+#' @examples
 #' # Reading the count matrix and the design matrix for an example:
 #' dir <- system.file("data", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))

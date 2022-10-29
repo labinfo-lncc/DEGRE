@@ -13,6 +13,8 @@
 #' @param legend_position you need to specify here the position of the legend. The default is "right".
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
+#' \value{No return value, called for side effects}
+#'
 #' @example
 #' # Reading the count matrix and the design matrix for an example:
 #' dir <- system.file("data", package = "DEGRE")

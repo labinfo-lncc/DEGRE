@@ -10,7 +10,7 @@
 #' @return dataframe object
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Reading the count matrix and the design matrix for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' tab <- read.csv(file.path(dir,"count_matrix_for_example.csv"))

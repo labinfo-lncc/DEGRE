@@ -41,9 +41,6 @@ BarGraphDEGRE(
 
 \item{legend.title}{the title of the legend. The default is "Regulation".}
 }
-\value{
-No return value, called for side effects
-}
 \description{
 Create a bar plot showing the number of downregulated and upregulated genes.
 }

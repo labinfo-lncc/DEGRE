@@ -2,8 +2,12 @@ Package: DEGRE
 Type: Package
 Title: Inferring Differentially Expressed Genes using Generalized Linear Mixed Models
 Version: 0.1.0
-Author: Douglas Terra Machado, Otávio José Bernardes Brustolini, Yasmmin Côrtes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro de Vasconcelos
-Maintainer: Douglas Terra Machado <dougterra@gmail.com>
+Authors@R: c(person("Douglas Terra Machado", "Developer", role = c("aut", "cre"),
+                     email = "dougterra@gmail.com"),
+              person("Otávio José Bernardes Brustolini", "Developer", role = "aut"),
+              person("Yasmmin Côrtes Martins", "Developer", role = "aut"),
+              person("Marco Antonio Grivet Mattoso Maia", "Developer", role = "ctb"),
+              person("Ana Tereza Ribeiro de Vasconcelos", "Developer", role = c("ctb","cph")))
 Description: Genes that are differentially expressed between two or more experimental conditions can be detected in RNA-Seq research. A high biological variability may impact the discovery of these genes once it may be divergent between the fixed effects. However, this variability can be covered by the random effects. DEGRE was designed to identify the differentially expressed genes considering fixed and random effects on individuals. These effects are identified earlier in the experimental design matrix. DEGRE has the implementation of preprocessing procedures to clean the count matrix of the gene reads, and it fits a regression for each gene using the Generalized Linear Mixed Model with the negative binomial distribution, followed by a Wald test to assess the regression coefficients.
 License: Artistic-2.0
 Encoding: UTF-8

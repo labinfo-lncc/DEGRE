@@ -44,11 +44,13 @@ VolcanoDEGRE(
 
 \item{legend.title}{the title of the legend. The default is "Regulation".}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 Create a volcano plot to visualize the proportion of downregulated and upregulated genes by applying a log2FC cutoff.
 }
 \examples{
-# Reading a CSV file for an example:
 dir <- system.file("extdata", package = "DEGRE")
 results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
 # Running the VolcanoDEGRE function

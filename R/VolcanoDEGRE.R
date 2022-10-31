@@ -13,10 +13,9 @@
 #' @param legend_position you need to specify here the position of the legend. The default is "right".
 #' @param legend.title the title of the legend. The default is "Regulation".
 #'
-#' \value{No return value, called for side effects}
+#' @return No return value, called for side effects
 #'
 #' @examples
-#' # Reading a CSV file for an example:
 #' dir <- system.file("extdata", package = "DEGRE")
 #' results_DEGRE_example <- read.csv(file.path(dir,"results_DEGRE_example.csv"))
 #' # Running the VolcanoDEGRE function

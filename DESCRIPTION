@@ -1,7 +1,7 @@
 Package: DEGRE
 Type: Package
 Title: Inferring Differentially Expressed Genes using Generalized Linear Mixed Models
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person(given = "Douglas", family = "Terra Machado", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6580-7628"),
                      email = "dougterra@gmail.com"),
               person(given = "Otávio José", family = "Bernardes Brustolini", role = "aut", comment = c(ORCID = "0000-0001-8132-9753")),

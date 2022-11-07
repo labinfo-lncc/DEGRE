@@ -1,5 +1,9 @@
 # Inferring differentially expressed genes using generalized linear mixed models in the DEGRE R package
 
+[![version](https://www.r-pkg.org/badges/version/DEGRE)](https://www.r-pkg.org/badges/version/DEGRE)
+[![lastmonth](https://cranlogs.r-pkg.org/badges/last-month/DEGRE?color=blue)](https://r-pkg.org/pkg/DEGRE)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)
+
 ## Scope
 
 ![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/man/figures/DEGRE%20logo2.png?raw=true)

@@ -18,9 +18,9 @@ The repository for DEGRE is at GitHub on the https://github.com/labinfo-lncc/DEG
 
 ## Citation
 
-The DEGRE package is under publication. Please cite it if you use it in your research.
+The scientific paper of DEGRE package is under publication. Please cite it if you use it in your research.
 
-You can cite it here below:
+You can cite the manual here below:
 
 ```R
 citation("DEGRE")

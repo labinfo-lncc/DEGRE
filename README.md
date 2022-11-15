@@ -357,7 +357,7 @@ The explained parameters are described below:
 - `legend.title` - the title of the legend.
 
 
-To label the up and downregulated genes in `results` `data.frame`, you can run it:
+To label the up and downregulated genes in `results` `data.frame`, you can run:
 
 ```R
 log2FC_cutoff <- 1   # You can change this value.

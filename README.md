@@ -97,6 +97,7 @@ results <- DEGRE(count_matrix = tab,
                  p_value_adjustment = "BH",
                  design_matrix = des,
                  formula = "condition + (1|sex)")
+colnames(results) <- c("ID","log2FC","P.value","Q.value","avaragelogCPM")
 
 ```
 

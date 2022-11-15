@@ -2,6 +2,8 @@
 
 [![version](https://www.r-pkg.org/badges/version/DEGRE)](https://www.r-pkg.org/badges/version/DEGRE)
 [![lastmonth](https://cranlogs.r-pkg.org/badges/last-month/DEGRE?color=blue)](https://r-pkg.org/pkg/DEGRE)
+[![lastweek](https://cranlogs.r-pkg.org/badges/last-week/DEGRE)](https://cranlogs.r-pkg.org/badges/last-week/DEGRE)
+[![lastday](https://cranlogs.r-pkg.org/badges/last-day/DEGRE)](https://cranlogs.r-pkg.org/badges/last-day/DEGRE)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)
 
 ## Scope

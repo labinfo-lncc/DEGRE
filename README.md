@@ -49,8 +49,7 @@ citation("DEGRE")
 To install the DEGRE package, you must run:
 
 ```R
-library(devtools)
-install_github("labinfo-lncc/DEGRE", ref="main")
+install.packages("DEGRE")
 ```
 
 

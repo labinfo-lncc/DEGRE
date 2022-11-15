@@ -169,7 +169,7 @@ print(filtering_gene)
 Applying this filtering step, you get the following result:
 
 ```R
-#                 ID   log2FC              P-value      Q-value
+#                 ID   log2FC              P.value      Q.value
 # ENSMUSG00000000881 -3.71189 1.83797593742305e-64 7.765448e-64
 ```
 
@@ -207,7 +207,7 @@ print(filtering_gene)
 ```
 
 ```R
-#                 ID     log2FC               P-value       Q-value
+#                 ID     log2FC               P.value       Q.value
 # ENSMUSG00000000881 -3.7118904  1.83797593742305e-64  7.765448e-64
 # ENSMUSG00000002820 -4.4200312 5.10465155023083e-105 2.974780e-104
 # ENSMUSG00000005610  1.4922973 2.41432633104465e-115 1.522467e-114
@@ -221,7 +221,7 @@ print(filtering_gene)
 To filter the *Q*-value from a specific cutoff, you can do the following:
 
 ```R
-results_q_value_cutoff <- results[results$`Q-value` < 0.05,]
+results_q_value_cutoff <- results[results$`Q.value` < 0.05,]
 ```
 
 Here we filtered based on the 5% of significance as a cutoff, but you can change it.
@@ -356,7 +356,7 @@ The explained parameters are described below:
 
 - `legend.title` - the title of the legend.
 
-To label the up and downregulated genes in results data.frame, you can run it:
+To label the up and downregulated genes in `results` `data.frame`, you can run it:
 
 ```R
 log2FC_cutoff <- 1   # You can change this value.

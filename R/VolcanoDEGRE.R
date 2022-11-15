@@ -59,11 +59,11 @@ VolcanoDEGRE <- function (results,
     stop("You need to enter with the output of the DEGRE function.")
 
   results$diffexpressed <- "NO"
-  results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q-value` < padj] <- "UP"
-  results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q-value` < padj] <- "DOWN"
+  results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q.value` < padj] <- "UP"
+  results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q.value` < padj] <- "DOWN"
 
   delabel <- ""
-  graph <- ggplot(data=results, aes(x=results$log2FC, y=-log10(results$`Q-value`), col=results$diffexpressed, label=delabel)) +
+  graph <- ggplot(data=results, aes(x=results$log2FC, y=-log10(results$`Q.value`), col=results$diffexpressed, label=delabel)) +
     geom_point() +
     theme_minimal() +
     geom_text_repel() +

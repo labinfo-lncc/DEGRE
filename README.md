@@ -356,7 +356,15 @@ The explained parameters are described below:
 
 - `legend.title` - the title of the legend.
 
-  
+To label the up and downregulated genes in results data.frame, you can run it:
+
+```R
+log2FC_cutoff <- 1   # You can change this value.
+padj <- 0.05   # You can change the 5% for the adjusted P-value cutoff.
+results$diffexpressed <- "NO"
+results$diffexpressed[results$log2FC > log2FC_cutoff & results$`Q.value` < padj] <- "UP"
+results$diffexpressed[results$log2FC < -log2FC_cutoff & results$`Q.value` < padj] <- "DOWN"
+```
 
 ### Bar plot
 

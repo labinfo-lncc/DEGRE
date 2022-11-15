@@ -229,7 +229,7 @@ Here we filtered based on the 5% of significance as a cutoff, but you can change
 To check if it works properly, you can check the maximum *Q*-value from `results` and `results_q_value_cutoff`:
 
 ```R
-max(results_q_value_cutoff$`Q-value`)
+max(results_q_value_cutoff$`Q.value`)
 ```
 
 ```R
@@ -239,7 +239,7 @@ max(results_q_value_cutoff$`Q-value`)
 Comparing it with the `results`, i.e., the data frame without the filtering, you get:
 
 ```R
-max(results$`Q-value`)
+max(results$`Q.value`)
 ```
 
 ```R
@@ -355,6 +355,7 @@ The explained parameters are described below:
 - `legend_position` - you need to specify here the position of the legend. The default is "right".
 
 - `legend.title` - the title of the legend.
+
 
 To label the up and downregulated genes in `results` `data.frame`, you can run it:
 

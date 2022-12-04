@@ -134,6 +134,7 @@ As you can see, the DEGRE function has important parameters, which are described
 - `formula` - it receives fixed and random effects descriptions.
 - `p_value_adjustment` - All the *P*-values computed must be corrected and the DEGRE package offers two possibilities: "BH" (Benjamini-Hochberg) correction (default) and "BON" (Bonferroni) correction.
 
+Obs.: The first column of `design_matrix` must be labeled "sample".
 
 ## A practical example of fixed and random effects
 In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group of people that receives a specific treatment and a group that receive only water instead of medicine. The illustration of this comparison can be seen below:

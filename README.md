@@ -136,8 +136,12 @@ As you can see, the DEGRE function has important parameters, which are described
 
 Obs.: The first column of `design_matrix` must be labeled "sample".
 
-## A practical example of fixed and random effects
-In a well-planned experimental design, fixed effects are features that are constant across the investigated individuals. Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group of people that receives a specific treatment and a group that receive only water instead of medicine. The illustration of this comparison can be seen below:
+## What are random effects?
+In RNA-seq, random effects are used to account for variation in gene expression levels that is due to sources other than the experimental factors of interest. This variation can come from a variety of sources, such as differences in the physiology of the individuals from whom the samples were collected, differences in the preparation of the samples, or differences in the sequencing process itself.
+
+One example of random effects in RNA-seq is when you have multiple samples from different patients or individuals, as the expression level can differ among individuals due to the genetic variations, environment factors or other non-experimental factors. By including random effects that reflect the individual level, you can account for the variation among individuals, which can lead to more accurate and powerful inferences about the effects of the experimental factors.
+
+Let's suppose we are doing an RNA-Seq experiment to identify DEGs in whole blood between a group of people that receives a specific treatment and a group that receive only water instead of medicine. The illustration of this comparison can be seen below:
 
 <img src="https://github.com/labinfo-lncc/DEGRE/blob/main/man/figures/Github - fixed and random effects_FIGtreatcontrol.png" width="650">
 
@@ -155,6 +159,7 @@ This kind of effect can be handle as a random effect to eliminate any potential 
 
 3. Donovan, Margaret K. R., Agnieszka D’Antonio-Chronowska, Matteo D’Antonio, and Kelly A. Frazer. 2020. “Cellular Deconvolution of GTEx Tissues Powers Discovery of Disease and Cell-Type Associated Regulatory Variants.” Nature Communications 11 (1): 955.
 
+Thus, it is important to highlight that DEGRE is suitable for non-longitudinal experimental designs and future analyses including these types of experiments can be conducted.
 
 ## Some applications you can do!
 

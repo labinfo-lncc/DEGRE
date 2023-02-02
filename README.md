@@ -10,7 +10,7 @@
 
 ![alt text](https://github.com/labinfo-lncc/DEGRE/blob/main/man/figures/DEGRE%20logo2.png?raw=true)
 
-The DEGRE is an R package that aims to identify Differentially Expressed Genes (DEGs) in a pairwise manner and considers the insertion of the individuals' random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For this purpose, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
+The DEGRE is an R package that aims to identify Differentially Expressed Genes (DEGs) in a pairwise manner and considers the insertion of the individuals' random effects in the experimental design. This package has a preprocessing step responsible for filtering genes that could impair DEGs’ inference. For DEGs' inference, DEGRE uses Generalized Linear Mixed Model (GLMM) with the negative binomial distribution.
 
 
 
@@ -76,7 +76,7 @@ Attention: if you are having trouble with the glmmTMB package, you can try remov
 
 ## Quick start
 
-To use this package, you must have a matrix containing the read counts for each gene in each biological replicate and a design matrix containing sample information. In the count matrix, the rows represent genes, while the columns represent the biological replicates of both experimental conditions. In the design matrix, the columns represent the relevant information of the samples.
+To use this package, you must have a matrix containing the read counts for each gene in each biological replicate and a design matrix containing the sample information. In the count matrix, the rows represent genes, while the columns represent the biological replicates of both experimental conditions. In the design matrix, the columns represent the relevant information of the samples.
 
 
 To start using the package, you need to load the library:
@@ -159,7 +159,7 @@ This kind of effect can be handle as a random effect to eliminate any potential 
 
 3. Donovan, Margaret K. R., Agnieszka D’Antonio-Chronowska, Matteo D’Antonio, and Kelly A. Frazer. 2020. “Cellular Deconvolution of GTEx Tissues Powers Discovery of Disease and Cell-Type Associated Regulatory Variants.” Nature Communications 11 (1): 955.
 
-Thus, it is important to highlight that DEGRE is suitable for non-longitudinal experimental designs and future analyses including these types of experiments can be conducted.
+It is important to highlight that DEGRE is suitable for non-longitudinal experimental designs and future analyses including these types of experiments can be conducted. It is interesting to note that DEGRE can be applied in scenarios that have random effects that cause disturbances that are more difficult to be considered in programs that only accept fixed effects. Thus, it is also interesting to consider that increasing the number of biological replicates increases the detection power of true DEGs by DEGRE. 
 
 ## Some applications you can do!
 

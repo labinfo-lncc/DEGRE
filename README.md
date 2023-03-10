@@ -5,7 +5,7 @@
 [![lastweek](https://cranlogs.r-pkg.org/badges/last-week/DEGRE)](https://cranlogs.r-pkg.org/badges/last-week/DEGRE)
 [![lastday](https://cranlogs.r-pkg.org/badges/last-day/DEGRE)](https://cranlogs.r-pkg.org/badges/last-day/DEGRE)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)](https://cranlogs.r-pkg.org/badges/grand-total/DEGRE)
-[![DOI](https://sandbox.zenodo.org/badge/487108567.svg)](https://sandbox.zenodo.org/badge/latestdoi/487108567)
+[![DOI](https://sandbox.zenodo.org/badge/487108567.svg)](https://doi.org/10.5281/zenodo.7636564)
 
 ## Scope
 

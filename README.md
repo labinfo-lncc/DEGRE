@@ -22,29 +22,7 @@ The repository for DEGRE is at GitHub on the https://github.com/labinfo-lncc/DEG
 
 ## Citation
 
-The scientific paper of DEGRE package is under publication. Please cite it if you use it in your research.
-
-You can cite the manual here below:
-
-```R
-citation("DEGRE")
-```
-
-```R
-# To cite package ‘DEGRE’ in publications use:
-#   Douglas Terra Machado (2022). DEGRE: Identification of Differentially Expressed Genes
-#   with Fixed and Random Effects. R package version 1.0.
-# A BibTeX entry for LaTeX users is
-#   @Manual{,
-#     title = {DEGRE: Identification of Differentially Expressed Genes with Fixed and Random
-# Effects},
-#     author = {Douglas Terra Machado, Otavio Jose Bernardes Brustolini, Yasmmin Cortes Martins, Marco Antonio Grivet Mattoso Maia, Ana Tereza Ribeiro Vasconcelos},
-#     year = {2022},
-#     note = {R package version 1.0},
-#   }
-#  ATTENTION: This citation information has been auto-generated from the package
-#  DESCRIPTION file and may need manual editing, see ‘help("citation")’.
-```
+Terra Machado D, Bernardes Brustolini OJ, Côrtes Martins Y, Grivet Mattoso Maia MA, Ribeiro de Vasconcelos AT. 2023. Inference of differentially expressed genes using generalized linear mixed models in a pairwise fashion. PeerJ 11:e15145 https://doi.org/10.7717/peerj.15145
 
 
 

@@ -196,6 +196,8 @@ DEGRE <- function(count_matrix, p_value_adjustment = "BH", formula, design_matri
     return(c(names$X1[i], tmp))
   }
 
+  #Rename the first colunm for experimental design
+  colnames(design_matrix)[1] <- "sample"
 
   # For the GLMM: create the count matrix with the features of the design matrix
   count_matrix_bip_overdisp$sample <- rownames(count_matrix_bip_overdisp)
